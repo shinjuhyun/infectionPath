@@ -18,7 +18,13 @@
 
 #define TIME_HIDE           2
 
-int trackInfester(int patient_no, int *detected_time, int *place);
+int trackInfester(int patient_no, int *detected_time, int *place)
+{
+	int infester;
+	ifctdb_getData(patient_no);
+	
+	return infester;
+}
 int main(int argc, const char * argv[]) {
     
     int menu_selection;
@@ -146,7 +152,12 @@ int main(int argc, const char * argv[]) {
                 break;
                 
             case MENU_TRACK:
-              
+            	//select the patient
+                printf("enter the selected patient number: ");
+                scanf("%d", &patientNum);
+                //track the infester and the detected time and place
+                trackInfester(patientNum, int *detected_time, int *place);
+                printf("the infester of %d is %d",patientNum, trackInfester);
                 break;
                 
             default:
