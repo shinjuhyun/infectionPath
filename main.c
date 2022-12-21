@@ -29,13 +29,14 @@ int main(int argc, const char * argv[]) {
     
     //------------- 1. loading patient info file ------------------------------
     //1-1. FILE pointer open
+    fp = fopen("patientInfo_sample.txt","r");
     
     if (argc != 2)
     {
         printf("[ERROR] syntax : infestPath (file path).");
         return -1;
     }
-    fp = fopen("patientInfo_sample.txt","r");
+    
     if (fp == NULL)
     {
         printf("[ERROR] Failed to open database file!! (%s)\n", argv[1]);
@@ -89,6 +90,7 @@ int main(int argc, const char * argv[]) {
 		int maxAge;
         int i;
         int j;
+        char ifctplaceName[MAX_PLACENAME];
         
         switch(menu_selection)
         {
@@ -112,22 +114,25 @@ int main(int argc, const char * argv[]) {
                 scanf("%s", placeName);
                 //information of patients who confirmed to be infected at the certain places
                 printf("patients who confirmed to be infected at %s\n", placeName);
-                
+                //compare if the selcted place and the infected place are the same
                 for(i = 0; i<ifctdb_len(); i++)
                 {
                     ifct_element = ifctdb_getData(i);
-                    ifctele_printElement(ifct_element);
+                    ifctplaceName[i] = ifctele_getHistPlaceIndex(ifct_element,i);
+                    
+                    if(strcmp(ifctele_getPlaceName(ifctplaceName[i]), placeName) == 0 )
+                    	ifctele_printElement(ifct_element);
                 }
                 break;
                 
             case MENU_AGE:
-            	
+            	//enter the maximum age and minimum age
                 printf("enter the minimum age : ");
                 scanf("%d", &minAge);
                 
                 printf("enter the maximum age : ");
                 scanf("%d", &maxAge);
-                
+                //print all the patient's information between the age minimum to maximum age
                 printf("information of patients between the age %d ~ %d: ", minAge, maxAge);
                 for (j = 0; j < ifctdb_len(); j++)
                 {

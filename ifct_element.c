@@ -167,9 +167,9 @@ void ifctele_printElement(void* obj)
    
     int i;
    
-    printf("index : %i\n", ptr->index);
-    printf("Age : %i\n", ptr->age);
-    printf("time : %i\n", ptr->time);
+    printf("index : %i\n", ifctele_getIndex(ptr->index));
+    printf("Age : %i\n", ifctele_getAge(ptr->age));
+    printf("time : %i\n", ifctele_getinfestedTime(ptr->time));
     printf("history: ");
     
     for (i=0; i<N_HISTORY; i++)
